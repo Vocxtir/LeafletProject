@@ -9,10 +9,10 @@ if (!empty($_SESSION['login_user'])) {
     <head>
         <meta charset="UTF-8" />
         <title>Connexion avec Ajax</title>
-        <link rel="stylesheet" href="V/css/style.css"/>
-        <script src="V/js/jquery.js"></script>
-        <script src="V/js/jquery.ui.shake.js"></script>
-        <script src="V/js/connect.js"></script>
+        <link rel="stylesheet" href="view/css/style.css"/>
+        <script src="view/js/jquery.js"></script>
+        <script src="view/js/jquery.ui.shake.js"></script>
+        <script src="view/js/connect.js"></script>
 
     </head>
 

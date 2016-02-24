@@ -24,7 +24,7 @@ $(document).ready(function () {
 
                 $.ajax({
                     type: "POST",
-                    url: "../../ajaxLogin.php",
+					url: 'index.php?control=user&action=connectUser',
                     data: dataString,
                     cache: false,
                     beforeSend: function () {
