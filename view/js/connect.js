@@ -18,13 +18,13 @@ $(document).ready(function () {
             if (!validateEmail(username)) {
                 $('#box').shake();
                 $("#login").val('Login')
-                $("#error").html("<span style='color:#cc0000'>Error:</span> Identifiants invalides. ");
+                $("#error").html("<span style='color:#cc0000'>Error:</span> Authentification failed ");
 
             } else {
 
                 $.ajax({
                     type: "POST",
-					url: 'index.php?control=user&action=connectUser',
+					url: 'index.php?control=user&action=whatWasOriginalyThere',
                     data: dataString,
                     cache: false,
                     beforeSend: function () {
@@ -33,12 +33,12 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data == 1)
                         {
-                            $("body").load("home.php").hide().fadeIn(1500).delay(6000);
+                            $("body").load("Map.tpl").hide().fadeIn(1500).delay(6000);
                         } else
                         {
                             $('#box').shake();
                             $("#login").val('Login')
-                            $("#error").html("<span style='color:#cc0000'>Error:</span> Identifiants invalides. ");
+                            $("#error").html("<span style='color:#cc0000'>Error:</span> Authentification failed ");
                         }
                     }
                 });

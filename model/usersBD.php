@@ -13,7 +13,7 @@
 		return false ;
 	}
 	
-	function signUp($name, $password) {
+	function signUpBD($name, $password) {
 		require_once(./control/connectBD.php);
 		$bdd = connectBD();
 		$req = $bdd->prepare('INSERT INTO users VALUES (:username, :password)');
