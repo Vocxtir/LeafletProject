@@ -13,7 +13,7 @@ if (!empty($_SESSION['login_user'])) {
         <script src="./view/js/jquery.js"></script>
         <script src="./view/js/jquery.ui.shake.js"></script>
         <script src="./view/js/connect.js"></script>
-
+		<!-- HelloGit -->
     </head>
 
     <body>
