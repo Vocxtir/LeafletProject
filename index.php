@@ -14,7 +14,7 @@ else {
         require ('./control/' . $control . '.php');
         $action();
     } else {
-        require ('view/login.php');
+        require ('./view/home.tpl');
     }
 }
 ?>
