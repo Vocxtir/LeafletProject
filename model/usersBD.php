@@ -13,11 +13,12 @@
 		return false ;
 	}
 	
+	//Registering the user
 	function signUpBD($name, $password) {
 		require_once(./control/connectBD.php);
 		$bdd = connectBD();
-		$req = $bdd->prepare('INSERT INTO users VALUES (:username, :password)');
-		$req-> execute(array('username' => $name, 'password' => $password));
+		$req = $bdd->prepare('INSERT INTO users VALUES (:id, :username, :password)');
+		$req-> execute(array('id' = > NULL, 'username' => $name, 'password' => $password));
 		if (!isnull($req))
 			return true ;
 		return false ;

@@ -1,36 +1,39 @@
 <?php
 
-function connectUser(){
-	if (isSet($_POST['username']) && isSet($_POST['password'])) {
-		$username = $_POST['username'];
-		$password = $_POST['password'];
-		fastConnect($username, $password)
+	//
+	function connectUser(){
+		if (isSet($_POST['username']) && isSet($_POST['password'])) {
+			$username = $_POST['username'];
+			$password = $_POST['password'];
+			fastConnect($username, $password)
+		}
+		
+		/*if ($realPassword == $password && $realUsername == $username){
+			$_SESSION['login_user'] = $username;
+			echo "1";
+		}*/
 	}
-	
-	/*if ($realPassword == $password && $realUsername == $username){
-		$_SESSION['login_user'] = $username;
-		echo "1";
-	}*/
-}
 
-function signUp(){
-	if (isSet($_POST['username']) && isSet($_POST['password'])) {
+	//Registering the user
+	function signUp(){
+		if (isSet($_POST['username']) && isSet($_POST['password'])) {
+			require_once("./model/usersBD.php");
+			if ( signUpBD( $username, $password) ){
+				fastConnect($username, $password);
+			}
+	}
+
+	function fastConnect($username, $password){
 		require_once("./model/usersBD.php");
-		if ( signUpBD( $username, $password) ){
-			fastConnect($username, $password);
-		}
-}
-function fastConnect($username, $password){
-	require_once("./model/usersBD.php");
-		if ( connectUserBD($username, $password)){
-			session_start();
-			$_SESSION['username'] = $username ;
-			$_SESSION['password'] = $password ;
-		}
-}
+			if ( connectUserBD($username, $password)){
+				session_start();
+				$_SESSION['username'] = $username ;
+				$_SESSION['password'] = $password ;
+			}
+	}
 
-//Cette fonction était là dans les exemples
-function whatWasOriginalyThere(){
+	//Cette fonction était là dans les exemples
+	function whatWasOriginalyThere(){
 	//include("db.php");
 	session_start();
 	if (isSet($_POST['username']) && isSet($_POST['password'])) {
