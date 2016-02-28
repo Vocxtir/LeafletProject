@@ -6,7 +6,7 @@
 	
 	//Retrieving the character
 	function RetrieveCharacterBD($name, $password){
-		require_once(./control/connectBD.php);
+		require_once('./control/connectBD.php');
 		$bdd = connectBD();
 		$req = $bdd->prepare('SELECT * FROM characters c, users u 
 								WHERE name = ? AND password = ?');
@@ -17,9 +17,9 @@
 	
 	//Registering the character
 	function createCharacterBD($name, $password) {
-		require_once(./control/connectBD.php);
+		require_once('./control/connectBD.php');
 		$bdd = connectBD();
-		$req = $bdd->prepare('INSERT INTO characters VALUES (:id, :charaname)');
+		$req = $bdd->prepare('INSERT INTO characters(id, name) VALUES (:id, :charaname)');
 		$req-> execute(array('id' = > NULL, 'charaname' => $name));
 		if (!isnull($req))
 			return true ;
