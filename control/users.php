@@ -1,11 +1,12 @@
 <?php
-
+//LeafletProject
 	//
 	function connectUser(){
+		$profile = array(); 
 		if (isSet($_POST['username']) && isSet($_POST['password'])) {
 			$username = $_POST['username'];
 			$password = $_POST['password'];
-			fastConnect($username, $password)
+			fastConnect($username, $password, $profile)
 		}
 		
 		/*if ($realPassword == $password && $realUsername == $username){
@@ -23,12 +24,18 @@
 			}
 	}
 
-	function fastConnect($username, $password){
+	function fastConnect($username, $password, &$profile){
 		require_once("./model/usersBD.php");
-			if ( connectUserBD($username, $password)){
+			if ( connectUserBD($username, $password, $profile)){
 				session_start();
-				$_SESSION['username'] = $username ;
-				$_SESSION['password'] = $password ;
+				$_SESSION['profile'] = $profile ;
+				//print_r($profile);
+				//echo "<br/> SESSION <br/>";
+				//print_r($_SESSION['profil']);
+				/*foreach($_SESSION['profil'] as $cle => $element){
+                	echo '[' . $cle . '] vaut : ' . $element . '<br />';
+				}*/
+				//echo $_SESSION['nom'];
 			}
 	}
 

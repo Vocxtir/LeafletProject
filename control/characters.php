@@ -1,10 +1,12 @@
 <?php
+//LeafletProject
 
 	//Retrieving the character
 	function RetrieveCharacter(){
-		if (isSet($_POST['username']) && isSet($_POST['password'])) {
+		$userID = $_SESSION['profil']['id'];	//UserID retrieved from the SESSION 
+		if (isSet($_POST['username']) && isSet($_POST['password']) && isSet($userID)) {
 			require_once("./model/charactersBD.php");
-			if ( RetrieveCharacterBD( $username, $password) ){
+			if ( RetrieveCharacterBD( $username, $password, $userID) ){
 				fastConnect($username, $password);
 			}
 		
@@ -16,9 +18,10 @@
 	
 	//Registering the character
 	function createCharacter(){
-		if (isSet($_POST['username']) && isSet($_POST['password'])) {
+		$userID = $_SESSION['profil']['id'];
+		if (isSet($_POST['username']) && isSet($_POST['password']) && isSet($userID)) {
 			require_once("./model/usersBD.php");
-			if ( createCharacterBD( $username, $password) ){
+			if ( createCharacterBD( $username, $password, $userID) ){
 				fastConnect($username, $password);
 			}
 	}
@@ -33,4 +36,9 @@
 	}
 
 
+	//Managing experience and level
+	function experienceManager() {
+		$userID = $_SESSION['profil']['id'];
+	}
+	
 ?>
