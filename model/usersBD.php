@@ -23,7 +23,7 @@
 		require_once('./control/connectBD.php');
 		$bdd = connectBD();
 		$req = $bdd->prepare('INSERT INTO users(id, username, password) VALUES (:id, :username, :password)');
-		$req-> execute(array('id' = > NULL, 'username' => $username, 'password' => $password));
+		$req-> execute(array('id' => NULL, 'username' => $username, 'password' => $password));
 		if (!isnull($req))
 			return true ;
 		return false ;

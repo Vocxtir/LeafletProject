@@ -4,11 +4,14 @@
 	//Retrieving the character
 	function RetrieveCharacter(){
 		$userID = $_SESSION['profil']['id'];	//UserID retrieved from the SESSION 
+		$character = array() ;
+		
 		if (isSet($_POST['username']) && isSet($_POST['password']) && isSet($userID)) {
 			require_once("./model/charactersBD.php");
-			if ( RetrieveCharacterBD( $username, $password, $userID) ){
-				fastConnect($username, $password);
+			if (RetrieveCharacterBD($userID, $character)){
+				$_SESSION['character'] = $character ;
 			}
+		}
 		
 		/*if ($realPassword == $password && $realUsername == $username){
 			$_SESSION['login_user'] = $username;
@@ -18,21 +21,15 @@
 	
 	//Registering the character
 	function createCharacter(){
-		$userID = $_SESSION['profil']['id'];
+		$userID 	= $_SESSION['profil']['id'];
+		$charaname 	= $_POST['charaname'] ;
+		
 		if (isSet($_POST['username']) && isSet($_POST['password']) && isSet($userID)) {
 			require_once("./model/usersBD.php");
-			if ( createCharacterBD( $username, $password, $userID) ){
-				fastConnect($username, $password);
+			if ( createCharacterBD($charaname, $userID) ){
+				return true ;
 			}
-	}
-
-	function fastConnect($username, $password){
-		require_once("./model/usersBD.php");
-			if ( connectUserBD($username, $password)){
-				session_start();
-				$_SESSION['username'] = $username ;
-				$_SESSION['password'] = $password ;
-			}
+		}
 	}
 
 

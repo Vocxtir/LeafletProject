@@ -18,7 +18,7 @@ $(document).ready(function () {
 
                 $.ajax({
                     type: "POST",
-					url: 'index.php?control=user&action=whatWasOriginalyThere',
+					url: 'index.php?control=users&action=testConnect',
                     data: dataString,
                     cache: false,
                     beforeSend: function () {
