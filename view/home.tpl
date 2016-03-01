@@ -9,11 +9,11 @@ if (!empty($_SESSION['login_user'])) {
     <head>
         <meta charset="UTF-8" />
         <title> RMW !</title>
-        <link rel="stylesheet" href="view/css/style.css"/>
+        <link rel="stylesheet" href="./view/css/style.css"/>
         <script src="./view/js/jquery.js"></script>
         <script src="./view/js/jquery.ui.shake.js"></script>
         <script src="./view/js/connect.js"></script>
-
+		<!-- HelloGit -->
     </head>
 
     <body>

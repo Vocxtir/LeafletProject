@@ -1,9 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 $(document).ready(function () {
 
@@ -24,7 +18,7 @@ $(document).ready(function () {
 
                 $.ajax({
                     type: "POST",
-					url: 'index.php?control=user&action=whatWasOriginalyThere',
+					url: 'index.php?control=users&action=testConnect',
                     data: dataString,
                     cache: false,
                     beforeSend: function () {
