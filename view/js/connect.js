@@ -1,16 +1,14 @@
 
 $(document).ready(function () {
 
-    $('#login').click(function ()
-    {
+    $('#login').click(function (){
         var username = $("#username").val();
         var password = $("#password").val();
         var dataString = 'username=' + username + '&password=' + password;
 
-        if ($.trim(username).length > 0 && $.trim(password).length > 0)
-        {
+        if ($.trim(username).length > 0 && $.trim(password).length > 0){
             if (!validateEmail(username)) {
-                $('#box').shake();
+                $('#box').effect( "shake" );;
                 $("#login").val('Login')
                 $("#error").html("<span style='color:#cc0000'>Error:</span> Authentification failed ");
 
@@ -25,38 +23,35 @@ $(document).ready(function () {
                         $("#login").val('Connecting...');
                     },
                     success: function (data) {
-                        if (data == 1)
-                        {
-                            $("body").load("Map.tpl").hide().fadeIn(1500).delay(6000);
-                        } else
-                        {
-                            $('#box').shake();
+                        if (data){
+						
+                            $("body").load("./view/map.tpl").hide().fadeIn(1500).delay(6000);
+                        } 
+						else{
+                            $('#box').effect( "shake" );
+								
                             $("#login").val('Login')
                             $("#error").html("<span style='color:#cc0000'>Error:</span> Authentification failed ");
                         }
                     }
                 });
             }
-
         }
-
         return false;
-
-
     });
 
 
-});
 
-function validateEmail(email)
-{
+
+function validateEmail(email){
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
 }
 
 // Sample code from jQuery UI
+// Made for the popup User Registering
 
-  $(function() {
+$(function() {
     var dialog, form,
  
       // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
@@ -96,52 +91,13 @@ function validateEmail(email)
         return true;
       }
     }
- 
-    function addUser() {
-      var valid = true;
-      allFields.removeClass( "ui-state-error" );
- 
-      valid = valid && checkLength( name, "username", 3, 16 );
-      valid = valid && checkLength( email, "email", 6, 80 );
-      valid = valid && checkLength( password, "password", 5, 16 );
- 
-      valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
-      valid = valid && checkRegexp( email, emailRegex, "eg. ui@jquery.com" );
-      valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
- 
-      if ( valid ) {
-				$.ajax({
-                    type: "POST",
-					url: 'index.php?control=users&action=signUp',
-                    data: dataString,
-                    cache: false,
-                    beforeSend: function () {
-                        $("#login").val('Connecting...');
-                    },
-                    success: function (data) {
-                        if (data)
-                        {
-							//On peut créer une autre requête $.ajax pour connecter directement après création de compte
-							$("#error").html("<span style='color:#cc0000'>Error:</span> Authentification failed ");
-                            //$("body").load("Map.tpl").hide().fadeIn(1500).delay(6000);
-                        } else
-                        {
-                            $('#box').shake();
-                            $("#login").val('Login')
-                            $("#error").html("<span style='color:#cc0000'>Error:</span> Authentification failed ");
-                        }
-                    }
-                });
-      }
-      return valid;
-    }
- 
+
     dialog = $( "#dialog-form" ).dialog({
-      autoOpen: false,
-      height: 300,
-      width: 350,
-      modal: true,
-      buttons: {
+		autoOpen: false,
+		height: 300,
+		width: 350,
+		modal: true,
+		buttons: {
         "Create an account": addUser,
         Cancel: function() {
           dialog.dialog( "close" );
@@ -161,5 +117,59 @@ function validateEmail(email)
     $( "#create-user" ).button().on( "click", function() {
       dialog.dialog( "open" );
     });
-  });
 
+	
+	function addUser(){
+		//dialog.dialog( "close" );
+		var valid = true;
+		
+		var username = $("#username").val();
+        var password = $("#password").val();
+		var dataString = 'username='+username+'&password='+password;
+		
+		try{
+			/* tabObject = eval('('+myJSONtext+')'); */
+			$.ajax({
+					type: "POST",
+					url: 'index.php?control=users&action=signUp',
+					data: dataString,	
+                    cache: false,
+                    beforeSend: function () {
+                        $("#login").val('Registering...');
+                    },
+					success : function(data){
+					   //Requête $.ajax redirigeant vers un login auto
+					   $("body").load("./view/map.tpl").hide().fadeIn(1500).delay(6000);
+					   
+					   //document.getElementsByTagName("h1")[0].style.fontSize = "1500px";
+
+					}
+				   //error : function(error) {	alert("erreur:" + error);	}
+			});
+		}
+		catch (err){
+			alert("error" + err.message);
+		}
+		$("#dialog-form" ).dialog( "close" );
+			//dialog.dialog( "close" );
+		}
+	});
+
+	//Tooltip function
+	$(function() {
+		var tooltips = $( "[title]" ).tooltip({
+		  position: {
+			my: "left top",
+			at: "right+5 top-5"
+		  }
+		});
+		$( "<button>" )
+		  .text( "Show help" )
+		  .button()
+		  .click(function() {
+			tooltips.tooltip( "open" );
+		  })
+		  .insertAfter( "#formRegister" );
+	});
+
+});
