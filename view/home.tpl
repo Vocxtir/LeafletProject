@@ -32,6 +32,8 @@ if (!empty($_SESSION['login_user'])) {
                     <div id="error">
 
                     </div>	
+					
+					<a> Create an account </a>
 
             </div>
         </form>	
