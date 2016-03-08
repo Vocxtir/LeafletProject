@@ -6,7 +6,7 @@
 
 	function connectUserBD($username, $password, &$profile){
 		require_once('connectBD.php');
-
+                $bdd = connectBD();
 		$req = $bdd->prepare('SELECT * FROM users WHERE username = ? AND password = ?');
 		$req -> execute(array($username, $password)) ;
 		$res = $req -> fetch();
