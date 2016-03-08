@@ -9,8 +9,8 @@
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
         <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-        <link rel="stylesheet" href="./css/style.css"/>
-        <script type='text/javascript' src='js/script.js'></script>
+        <link rel="stylesheet" href="view/css/style.css"/>
+        <script type='text/javascript' src='view/js/script.js'></script>
 
     </head>
     <body>

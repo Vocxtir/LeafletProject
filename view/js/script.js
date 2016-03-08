@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
 //	/**
 //	 * Reder map
@@ -47,8 +47,39 @@ $(document).ready(function() {
 //      }
 //    map.on('click', onMapClick);*
 
-map = L.map('map').setView([48.856578,2.351828], 2);
+    	map = L.map('map').setView([48.856578,2.351828], 2);
 	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 	}).addTo(map);
-})
+
+    L.marker([51.5, -0.09]).addTo(map)
+            .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+            .openPopup();
+    
+    newMarkerGroup = new L.FeatureGroup();
+	marker = new L.marker([48.856578,2.351828], {draggable:'true'});
+		marker.on('dragend', function(event){
+			var marker = event.target;
+			var position = marker.getLatLng();
+			marker.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
+			map.panTo(new L.LatLng(position.lat, position.lng))
+			$.ajax({
+				type: 'GET',
+				url: "http://nominatim.openstreetmap.org/reverse",
+				dataType: 'json',
+				jsonCallback: 'data',
+				data: {format: "json", lat: position.lat,lon:position.lng,limit:'1',zoom:'4',addressdetails: '1'},
+				error: function(xhr, status, error) {
+					alert("ERROR "+error);
+				},
+				success: function(data){
+					//Les données Json récupérées sont dans le tableau data
+					//...
+					alert(data.display_name);
+				}
+			});
+		 });
+		map.addLayer(marker);
+    
+    
+});

@@ -90,7 +90,7 @@ $(document).ready(function () {
                 if (msg2 == 1) // si la connexion en php a fonctionnée
                 {
                     $("body").html("Inscription réussi, préparez vous pour l'aventure !\
-				<form method=\"post\" action=\"index.php?control=user&action=play\">\
+				<form method=\"post\" action=\"index.php?control=users&action=play\">\
 				<input type=\"submit\" value=\"Prêt !\"\>\
 				</form>\
 				");
