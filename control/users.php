@@ -1,12 +1,35 @@
 <?php
 //LeafletProject
 	//
-	function connectUser(){
+	
+
+if(isset($_POST['action'])) {
+    $action = $_POST['action'];
+    switch($action) {
+        case 'login' : connectUser();break;
+        case 'signin' : signUp();break;
+    }
+}
+
+
+function play(){
+    require ('view/map.tpl'); //ou 
+}    
+
+function connectUser(){
 		$profile = array(); 
 		if (isSet($_POST['username']) && isSet($_POST['password'])) {
 			$username = $_POST['username'];
 			$password = $_POST['password'];
-			fastConnect($username, $password, $profile);
+                        require_once("../model/usersBD.php");
+                        
+			if ( connectUserBD($username, $password, $profile)){
+                            $_SESSION['user'] = $profile;
+                            echo "1";  // valeur bone en JS
+                        }
+                        else {
+                            echo "0"; //valeur fausse en JS
+                        }  
 		}
 		
 		/*if ($realPassword == $password && $realUsername == $username){
@@ -16,19 +39,23 @@
 	}
 
 	//Registering the user
-	function signUp(){
+        
+        function signUp(){
 		if (isSet($_POST['username']) && isSet($_POST['password'])) {
 			$username = $_POST['username'] ;
 			$password = $_POST['password'] ;
 			
-			require_once("./model/usersBD.php");
+			require_once("../model/usersBD.php");
 			if ( signUpBD($username, $password) ){
-				fastConnect($username, $password);
+                            echo "1";
 			}
+                        else {
+                            echo "0";
+                        }
 	}
 
 	function fastConnect($username, $password, &$profile){
-		require_once("./model/usersBD.php");
+		
 			if ( connectUserBD($username, $password, $profile)){
 				session_start();
 				$_SESSION['profile'] = $profile ;

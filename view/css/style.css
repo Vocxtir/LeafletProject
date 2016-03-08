@@ -85,3 +85,7 @@ border-color: #3ac162 !important;
 	padding:10px;
 }
 #error{font-size:12px; margin-top:10px}
+
+#map { 
+    height: 180px; 
+}
