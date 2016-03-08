@@ -6,7 +6,7 @@
 
 	function connectUserBD($username, $password, &$profile){
 		require_once('connectBD.php');
-		$bdd = connectBD();
+
 		$req = $bdd->prepare('SELECT * FROM users WHERE username = ? AND password = ?');
 		$req -> execute(array($username, $password)) ;
 		$res = $req -> fetch();
@@ -15,16 +15,14 @@
 			return true;
 		}	
 		return false ;
-	}
-	
-	//Registering the user
-	function signUpBD($username, $password) {
+
+		
+    }
+
+    function signUpBD($username, $password) {
 		require_once('connectBD.php');
 		$bdd = connectBD();
 		$req = $bdd->prepare('INSERT INTO users(id, username, password) VALUES (:id, :username, :password)');
 		$req-> execute(array('id' => NULL, 'username' => $username, 'password' => $password));
 		return true;
 	}
-
-
-?>
