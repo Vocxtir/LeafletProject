@@ -7,8 +7,8 @@
 
 	function connectBD(){
 		try{
-			$bdd = new PDO('mysql:host=localhost;dbname=dut2_rahman;charset=utf8', 'rahman', 'rahman');
-			return $bdd ;
+                        $dbh = new PDO('mysql:host=localhost;dbname=webjava', "root", "");
+			return $dbh ;
 		} catch (Exception $e){
 				die('Erreur : ' . $e->getMessage());
 		}

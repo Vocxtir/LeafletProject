@@ -1,6 +1,14 @@
 <?php
 //LeafletProject
 
+if(isset($_POST['action'])) {
+    $action = $_POST['action'];
+    switch($action) {
+        case 'RetrieveCharacter':  RetrieveCharacter() ;break;
+        case 'createCharacter'  :  createCharacter() ;break;
+    }
+}
+
 	//Retrieving the character
 	function RetrieveCharacter(){
 		$userID = $_SESSION['profil']['id'];	//UserID retrieved from the SESSION 
